@@ -1,0 +1,10 @@
+<h1>
+  <%= @article.title %>
+   | Article
+  <%= @article.id %>
+</h1>
+
+<%= @article.title %>
+<%= @article.body %>
+<p> Created at: <%= @article.created_at.year %>-<%= @article.created_at.month %>-<%= @article.created_at.day %> | Updated last at: <%= @article.updated_at.year %>-<%= @article.updated_at.month %>-<%= @article.updated_at.day %>
+</p>
