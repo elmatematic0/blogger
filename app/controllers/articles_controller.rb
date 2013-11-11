@@ -1,4 +1,32 @@
 class ArticlesController < ApplicationController
+  include ArticlesHelper #using this approach rather than private method below. It allows title and body as parameters.
+
+  def new
+    @article = Article.new
+  end
+
+  def create
+    @article = Article.new(article_params)
+    @article.save
+
+   flash.notice = "Article '#{@article.title}' Created!"
+
+    redirect_to article_path(@article)
+   end
+  
+  def edit
+    @article = Article.find(params[:id])
+  end
+
+  def update
+    @article = Article.find(params[:id])
+    @article.update(article_params)
+
+    flash.notice = "Article '#{@article.title}' Updated!"
+
+    redirect_to article_path(@article)  
+  end
+
   def index
     @articles = Article.all
   end
@@ -7,4 +35,11 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+    flash.notice = "Article '#{@article.title}' Deleted!"
+
+    redirect_to articles_path
+  end
 end
